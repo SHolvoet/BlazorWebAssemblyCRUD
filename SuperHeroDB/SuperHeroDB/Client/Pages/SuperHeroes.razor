@@ -20,19 +20,21 @@ else
                 <th>Comic</th>
                 <th></th>
                 <th></th>
+                <th></th>
             </tr>
         </thead>
         <tbody>
             @foreach (var hero in SuperHeroService.Heroes)
             {
-                <tr>
-                    <td>@hero.FirstName</td>
-                    <td>@hero.LastName</td>
-                    <td>@hero.HeroName</td>
-                    <td>@hero.Comic.Name</td>
-                    <td><button class="btn btn-primary" @onclick="(() => ShowHero(hero.Id))">Show</button></td>
-                    <td><button class="btn btn-primary" @onclick="(() => EditHero(hero.Id))">Edit</button></td>
-                </tr>
+            <tr>
+                <td>@hero.FirstName</td>
+                <td>@hero.LastName</td>
+                <td>@hero.HeroName</td>
+                <td>@hero.Comic.Name</td>
+                <td><button class="btn btn-primary" @onclick="(() => ShowHero(hero.Id))">Show</button></td>
+                <td><button class="btn btn-primary" @onclick="(() => EditHero(hero.Id))">Edit</button></td>
+                <td><button class="btn btn-primary" @onclick="(() => DeleteHero(hero.Id))">Delete</button></td>
+            </tr>
             }
         </tbody>
     </table>
@@ -57,6 +59,11 @@ else
     void EditHero(int id)
     {
         heroToEdit = SuperHeroService.Heroes.Find(h => h.Id == id);
+    }
+
+    void DeleteHero(int id)
+    {
+        SuperHeroService.DeleteSuperHero(id);
     }
 
     public void Dispose()
